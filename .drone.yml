@@ -16,16 +16,6 @@ pipeline:
       - GIT_PWD
       - GIT_EMAIL
     commands:
-      - mkdir ./new-repo/ && cd ./new-repo/
-      - git init
-      - git config --global user.email $$GIT_EMAIL
-      - git remote add origin https://$$GIT_USER:$$GIT_PWD@github.com/rhysemmas/helm-chart-hoster.git
-      - git fetch
-      - git checkout --track origin/master
-      - git pull
-      - mv ../output/* .
-      - git add .
-      - git commit -m "Helm package robot commit"
-      - git push -u origin master
+      - sh ./ci/git-push.sh
     when:
       event: push
