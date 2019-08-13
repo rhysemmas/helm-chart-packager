@@ -1,37 +1,31 @@
 pipeline:
-  git-clone:
-    image: alpine/git:1.0.7
-    secrets: [ git_user, git_pwd ]
-    commands:
-      - git clone https://github.com/rhysemmas/helm-chart-packager.git
-      - git checkout -b ${DRONE_COMMIT_BRANCH}
-    when:
-      #event: push
-      event: pull_request
-      branch:
-        exclude: master
-
   helm-package:
     image: alpine/helm:2.14.3
     commands:
-      - helm package ./helm/app/ -d ./docs/
-      - helm repo index ./docs/
+      - helm init --client-only
+      - mkdir ./output/
+      - helm package ./helm/nginx/ -d ./output/
+      - helm repo index ./output/
     when:
-      #event: push
-      event: pull_request
-      branch:
-        exclude: master
+      event: push
 
-# we are going to enter a loop here, if we commit to the same branch with the new packaged helm chart then drone is going to run this step again - would event: pull_request work?
   git-push-helm:
     image: alpine/git:1.0.7
-    secrets: [ git_user, git_pwd ]
+    secrets:
+      - GIT_USER
+      - GIT_PWD
+      - GIT_EMAIL
     commands:
-      - git add ./docs/
+      - mkdir ./new-repo/ && cd ./new-repo/
+      - git init
+      - git config --global user.email $$GIT_EMAIL
+      - git remote add origin https://$$GIT_USER:$$GIT_PWD@github.com/rhysemmas/helm-chart-hoster.git
+      - git fetch
+      - git checkout --track origin/master
+      - git pull
+      - mv ../output/* .
+      - git add .
       - git commit -m "Helm package robot commit"
-      - git push -u origin ${DRONE_COMMIT_BRANCH}
+      - git push -u origin master
     when:
-      #event: push
-      event: pull_request
-      branch:
-        exclude: master
+      event: push
