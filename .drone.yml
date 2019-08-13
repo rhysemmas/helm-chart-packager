@@ -34,6 +34,7 @@ pipeline:
       - GIT_PWD
       - GIT_EMAIL
     commands:
+      - echo $$GIT_EMAIL
       - git config --global user.email $$GIT_EMAIL
       - git add ./docs/
       - git commit -m "Helm package robot commit"
