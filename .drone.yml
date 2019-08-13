@@ -39,6 +39,7 @@ pipeline:
       - git checkout -b ${DRONE_COMMIT_BRANCH}
       - git add ./docs/
       - git commit -m "Helm package robot commit"
+      - echo $$GIT_PWD
       - git push -u origin ${DRONE_COMMIT_BRANCH} https://$$GIT_USER:$$GIT_PWD@rhysemmas/helm-chart-packager.git
     when:
       event: push
