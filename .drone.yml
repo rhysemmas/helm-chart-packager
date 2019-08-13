@@ -25,7 +25,7 @@ pipeline:
       - git config --global user.email $$GIT_EMAIL
       - git remote add origin https://$$GIT_USER:$$GIT_PWD@github.com/rhysemmas/helm-chart-hoster.git
       - git fetch
-      - git pull
+      - git branch --set-upstream-to=origin/master master
       - git status
       - git add .
       - git commit -m "Helm package robot commit"
