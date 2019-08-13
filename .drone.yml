@@ -23,13 +23,13 @@ pipeline:
       - cd ./docs/
       - git init
       - git config --global user.email $$GIT_EMAIL
-      - git remote set-url origin https://github.com/rhysemmas/helm-chart-hoster.git
+      - git remote add origin https://$$GIT_USER:$$GIT_PWD@github.com/rhysemmas/helm-chart-hoster.git
       - git fetch
       - git pull
       - git status
       - git add .
       - git commit -m "Helm package robot commit"
-      - git push https://$$GIT_USER:$$GIT_PWD@github.com/rhysemmas/helm-chart-hoster.git
+      - git push -u origin master
     when:
       event: push
 #      event: pull_request
