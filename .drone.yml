@@ -1,3 +1,4 @@
+pipeline:
   git-clone:
     image: alpine/git:1.0.7
     secrets: [ git_user, git_pwd ]
