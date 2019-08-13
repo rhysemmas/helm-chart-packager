@@ -1,18 +1,4 @@
 pipeline:
-
-# drone clones git repo on build - but it also resets :)3
-  #git-clone:
-  #  image: alpine/git:1.0.7
-  #  secrets: [ git_user, git_pwd ]
-  #  commands:
-  #    - git init
-  #    - git status
-  #  when:
-  #    event: push
-#      event: pull_request
-  #    branch:
-  #      exclude: master
-
   helm-package:
     image: alpine/helm:2.14.3
     commands:
@@ -34,11 +20,13 @@ pipeline:
       - GIT_PWD
       - GIT_EMAIL
     commands:
+      - cd ./docs/
+      - git init
       - git config --global user.email $$GIT_EMAIL
-      - git checkout -b ${DRONE_COMMIT_BRANCH}
+      - git checkout master
       - git add ./docs/
       - git commit -m "Helm package robot commit"
-      - git push https://$$GIT_USER:$$GIT_PWD@github.com/rhysemmas/helm-chart-packager.git
+      - git push https://$$GIT_USER:$$GIT_PWD@github.com/rhysemmas/helm-chart-hoster.git
     when:
       event: push
 #      event: pull_request
