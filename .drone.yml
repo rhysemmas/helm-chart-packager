@@ -36,6 +36,7 @@ pipeline:
       - GIT_EMAIL
     commands:
       - git config --global user.email $$GIT_EMAIL
+      - git checkout -b ${DRONE_COMMIT_BRANCH}
       - git add ./docs/
       - git commit -m "Helm package robot commit"
       - git push -u origin ${DRONE_COMMIT_BRANCH}
