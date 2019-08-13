@@ -17,7 +17,7 @@ pipeline:
   helm-package:
     image: alpine/helm:2.14.3
     commands:
-      - helm package ./helm/app/ -d ./docs/
+      - helm package ./helm/nginx/ -d ./docs/
       - helm repo index ./docs/
     when:
       #event: push
