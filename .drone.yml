@@ -7,8 +7,7 @@ pipeline:
     secrets: [ git_user, git_pwd ]
     commands:
       - git init
-      - git remote add origin https://github.com/rhysemmas/helm-chart-packager.git
-      - git fetch --no-tags
+      - git status
     when:
       event: push
 #      event: pull_request
