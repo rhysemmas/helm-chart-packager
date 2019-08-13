@@ -34,9 +34,7 @@ pipeline:
       - GIT_PWD
       - GIT_EMAIL
     commands:
-      - export GIT_EMAIL=$${GIT_EMAIL}
-      - echo ${GIT_EMAIL}
-      - git config --global user.email ${GIT_EMAIL}
+      - git config --global user.email $$GIT_EMAIL
       - git add ./docs/
       - git commit -m "Helm package robot commit"
       - git push -u origin ${DRONE_COMMIT_BRANCH}
