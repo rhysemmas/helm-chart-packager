@@ -29,7 +29,7 @@ pipeline:
       - git checkout --track origin/master
       - git pull
       - git status
-      - rsync
+      - mv ../docs/* .
       - git add .
       - git commit -m "Helm package robot commit"
       - git push -u origin master
