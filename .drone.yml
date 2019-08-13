@@ -26,7 +26,8 @@ pipeline:
       - git remote add origin https://$$GIT_USER:$$GIT_PWD@github.com/rhysemmas/helm-chart-hoster.git
       - git status
       - git fetch
-      - git pull origin/master master
+      - git checkout --track origin/master
+      - git pull
       - git status
       - rsync
       - git add .
