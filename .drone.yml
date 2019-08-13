@@ -30,8 +30,11 @@ pipeline:
   git-push-helm:
     image: alpine/git:1.0.7
     secrets: [ GIT_USER, GIT_PWD, GIT_EMAIL ]
+    environment:
+      GIT_EMAIL:
+        from_secret: GIT_EMAIL
     commands:
-      - git config --global user.email $$GIT_EMAIL
+      - git config --global user.email $GIT_EMAIL
       - git add ./docs/
       - git commit -m "Helm package robot commit"
       - git push -u origin ${DRONE_COMMIT_BRANCH}
