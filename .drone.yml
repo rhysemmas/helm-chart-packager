@@ -26,7 +26,7 @@ pipeline:
       - git status
       - git add .
       - git commit -m "Helm package robot commit"
-      - git push https://$$GIT_USER:$$GIT_PWD@github.com/rhysemmas/helm-chart-hoster.git
+      - git push --set-upstream https://$$GIT_USER:$$GIT_PWD@github.com/rhysemmas/helm-chart-hoster.git master
     when:
       event: push
 #      event: pull_request
