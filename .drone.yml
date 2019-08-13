@@ -3,8 +3,9 @@ pipeline:
     image: alpine/helm:2.14.3
     commands:
       - helm init --client-only
-      - helm package ./helm/nginx/ -d ./docs/
-      - helm repo index ./docs/
+      - mkdir ./output/
+      - helm package ./helm/nginx/ -d ./output/
+      - helm repo index ./output/
     when:
       event: push
       #event: pull_request
@@ -27,7 +28,7 @@ pipeline:
       - git fetch
       - git checkout --track origin/master
       - git pull
-      - mv ../docs/* .
+      - mv ../output/* .
       - git add .
       - git commit -m "Helm package robot commit"
       - git push -u origin master
