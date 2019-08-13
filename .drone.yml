@@ -8,12 +8,7 @@ pipeline:
       - helm repo index ./output/
     when:
       event: push
-      #event: pull_request
-      branch:
-        exclude: master
 
-# we are going to enter a loop here, if we commit to the same branch with the new packaged helm chart then drone is going to run this step again - would event: pull_request work?
-# secrets are not exposed to PRs by default and if using secrets with PRs, the repo will need to be protected in drone
   git-push-helm:
     image: alpine/git:1.0.7
     secrets:
@@ -34,6 +29,3 @@ pipeline:
       - git push -u origin master
     when:
       event: push
-#      event: pull_request
-      branch:
-        exclude: master
