@@ -32,9 +32,9 @@ pipeline:
     secrets:
       - GIT_USER
       - GIT_PWD
-      - GIT_EMAIL
+      - git_email
     commands:
-      - echo $$GIT_EMAIL
+      - echo $$git_email
       - git config --global user.email $$GIT_EMAIL
       - git add ./docs/
       - git commit -m "Helm package robot commit"
