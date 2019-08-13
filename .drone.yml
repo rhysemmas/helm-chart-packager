@@ -1,15 +1,18 @@
 pipeline:
-  git-clone:
-    image: alpine/git:1.0.7
-    secrets: [ git_user, git_pwd ]
-    commands:
-      - git clone https://github.com/rhysemmas/helm-chart-packager.git
-      - git checkout -b ${DRONE_COMMIT_BRANCH}
-    when:
+
+# drone clones git repo on build
+
+#  git-clone:
+#    image: alpine/git:1.0.7
+#    secrets: [ git_user, git_pwd ]
+#    commands:
+#      - git clone https://github.com/rhysemmas/helm-chart-packager.git
+#      - git checkout -b ${DRONE_COMMIT_BRANCH}
+#    when:
       #event: push
-      event: pull_request
-      branch:
-        exclude: master
+#      event: pull_request
+#      branch:
+#        exclude: master
 
   helm-package:
     image: alpine/helm:2.14.3
@@ -19,8 +22,8 @@ pipeline:
     when:
       #event: push
       event: pull_request
-      branch:
-        exclude: master
+#      branch:
+#        exclude: master
 
 # we are going to enter a loop here, if we commit to the same branch with the new packaged helm chart then drone is going to run this step again - would event: pull_request work?
   git-push-helm:
@@ -33,5 +36,5 @@ pipeline:
     when:
       #event: push
       event: pull_request
-      branch:
-        exclude: master
+#      branch:
+#        exclude: master
