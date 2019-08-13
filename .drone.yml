@@ -1,7 +1,6 @@
 pipeline:
 
 # drone clones git repo on build - but it also resets :)
-#
   git-clone:
     image: alpine/git:1.0.7
     secrets: [ git_user, git_pwd ]
