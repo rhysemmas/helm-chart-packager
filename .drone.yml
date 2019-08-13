@@ -32,10 +32,11 @@ pipeline:
     secrets:
       - GIT_USER
       - GIT_PWD
-      - git_email
+      - GIT_EMAIL
     commands:
-      - echo $$git_email
-      - git config --global user.email $$GIT_EMAIL
+      - export GIT_EMAIL=$${GIT_EMAIL}
+      - echo ${GIT_EMAIL}
+      - git config --global user.email ${GIT_EMAIL}
       - git add ./docs/
       - git commit -m "Helm package robot commit"
       - git push -u origin ${DRONE_COMMIT_BRANCH}
