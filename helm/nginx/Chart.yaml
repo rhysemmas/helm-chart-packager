@@ -1,6 +1,6 @@
 name: nginx
 description: A basic NGINX HTTP server
-version: 0.1.0-e
+version: 0.1.0-f
 kubeVersion: ">=1.2.0"
 keywords:
   - http
