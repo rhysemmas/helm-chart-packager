@@ -4,7 +4,7 @@ pipeline:
     commands:
       - helm init --client-only
       - mkdir ./output/
-      - helm package ./helm/nginx/ -d ./output/
+      - helm package ./helm/kiam/ -d ./output/
       - helm repo index ./output/
     when:
       event: push
