@@ -9,8 +9,6 @@ apk add git
 if ! git diff HEAD~1 | grep -iE 'a\/helm.*';
 then
   echo "No changes to helm chart made, skipping..."
-  mkdir a
-  mkdir a
   exit 0
 else
   # package helm chart
