@@ -6,7 +6,7 @@ pipeline:
     commands:
       - helm init --client-only
       - mkdir ./output/
-      - helm package ./helm/${APP}/ -d ./output/
+      - helm package ./helm/$APP/ -d ./output/
     when:
       event: push
 
