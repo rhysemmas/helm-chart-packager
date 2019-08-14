@@ -19,7 +19,7 @@ git pull
 
 # add packaged helm chart and reindex
 mv ${DRONE_WORKSPACE}/output/* ${DRONE_WORKSPACE}/new-repo/charts/
-helm repo index
+helm repo index ${DRONE_WORKSPACE}/new-repo/charts/
 
 # stage and commit new files, push to remote
 git add .
