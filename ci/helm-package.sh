@@ -13,8 +13,8 @@ then
 else
   # package helm chart
   helm init --client-only
-  mkdir ./output/
-  helm package ./helm/${APP}/ -d ./output/
+  mkdir ${DRONE_WORKSPACE}/output/
+  helm package ${DRONE_WORKSPACE}/helm/${APP}/ -d ${DRONE_WORKSPACE}/output/
 
   # create new git repo and add remote
   mkdir ${DRONE_WORKSPACE}/new-repo/ && cd ${DRONE_WORKSPACE}/new-repo/
