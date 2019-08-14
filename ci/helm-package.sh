@@ -3,25 +3,32 @@
 # install git
 apk add git
 
-# package helm chart
-helm init --client-only
-mkdir ./output/
-helm package ./helm/${APP}/ -d ./output/
+# check if changes have been made to the helm chart
+if ! git diff HEAD | grep -iE 'a\/helm.*';
+then
+  echo "No changes to helm chart made, continuing"
+  exit 0
+else
+  # package helm chart
+  helm init --client-only
+  mkdir ./output/
+  helm package ./helm/${APP}/ -d ./output/
 
-# create new git repo and add remote
-mkdir ${DRONE_WORKSPACE}/new-repo/ && cd ${DRONE_WORKSPACE}/new-repo/
-git init
-git config --global user.email ${GIT_EMAIL}
-git remote add origin https://${GIT_USER}:${GIT_TOKEN}@github.com/rhysemmas/helm-chart-hoster.git
-git fetch
-git checkout --track origin/master
-git pull
+  # create new git repo and add remote
+  mkdir ${DRONE_WORKSPACE}/new-repo/ && cd ${DRONE_WORKSPACE}/new-repo/
+  git init
+  git config --global user.email ${GIT_EMAIL}
+  git remote add origin https://${GIT_USER}:${GIT_TOKEN}@github.com/rhysemmas/helm-chart-hoster.git
+  git fetch
+  git checkout --track origin/master
+  git pull
 
-# add packaged helm chart and reindex
-mv ${DRONE_WORKSPACE}/output/* ${DRONE_WORKSPACE}/new-repo/charts/
-helm repo index ${DRONE_WORKSPACE}/new-repo/charts/
+  # add packaged helm chart and reindex
+  mv ${DRONE_WORKSPACE}/output/* ${DRONE_WORKSPACE}/new-repo/charts/
+  helm repo index ${DRONE_WORKSPACE}/new-repo/charts/
 
-# stage and commit new files, push to remote
-git add .
-git commit -m "Helm package robot commit"
-git push -u origin master
+  # stage and commit new files, push to remote
+  git add .
+  git commit -m "Helm package robot commit"
+  git push -u origin master
+fi

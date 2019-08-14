@@ -2,7 +2,7 @@ pipeline:
   helm-package:
     image: alpine/helm:2.14.3
     environment:
-      APP: kiam
+      APP: nginx
     secrets:
       - GIT_USER
       - GIT_TOKEN
