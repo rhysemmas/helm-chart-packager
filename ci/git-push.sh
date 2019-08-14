@@ -9,5 +9,5 @@ git checkout --track origin/master
 git pull
 mv ${DRONE_WORKSPACE}/output/* ${DRONE_WORKSPACE}/new-repo/charts/
 git add .
-git commit -m "Helm package robot commit" && echo "Local files committed" || echo "Error committing files"
-git push -u origin master && echo "Local files pushed to remote" || echo "Error pushing to remote"
+git commit -m "Helm package robot commit" && echo "Local files committed" || ${echo "Error committing files"; exit 1}
+git push -u origin master && echo "Local files pushed to remote" || ${echo "Error pushing to remote"; exit 1}
