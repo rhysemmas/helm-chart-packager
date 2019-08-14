@@ -24,7 +24,7 @@ pipeline:
   helm-index:
     image: alpine/helm:2.14.3
     commands:
-      - helm repo index ${DRONE_WORKSPACE}/new-repo/charts/
+      - helm repo index $DRONE_WORKSPACE/new-repo/charts/
     when:
       event: push
 
