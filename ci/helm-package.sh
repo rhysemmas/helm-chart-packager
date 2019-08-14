@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+set -e
+
 # install git
 apk add git
 
@@ -9,6 +11,8 @@ then
   echo "No changes to helm chart made, skipping..."
   exit 0
 else
+  mkdir a
+  mkdir a
   # package helm chart
   helm init --client-only
   mkdir ./output/
