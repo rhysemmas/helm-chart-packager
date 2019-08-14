@@ -30,6 +30,10 @@ pipeline:
 
   git-push-remote:
     image: alpine/git:1.0.7
+    secrets:
+      - GIT_USER
+      - GIT_TOKEN
+      - GIT_EMAIL
     commands:
       - sh ./ci/git-push.sh
     when:
