@@ -4,6 +4,7 @@ pipeline:
     environment:
       APP: kiam
     commands:
+      - git
       - helm init --client-only
       - mkdir ./output/
       - helm package ./helm/$APP/ -d ./output/
