@@ -1,21 +1,13 @@
 pipeline:
   helm-package:
     image: alpine/helm:2.14.3
-    commands:
-      - helm init --client-only
-      - mkdir ./output/
-      - helm package ./helm/nginx/ -d ./output/
-      - helm repo index ./output/
-    when:
-      event: push
-
-  git-push-helm:
-    image: alpine/git:1.0.7
+    environment:
+      APP: kiam
     secrets:
       - GIT_USER
-      - GIT_PWD
+      - GIT_TOKEN
       - GIT_EMAIL
     commands:
-      - sh ./ci/git-push.sh
+      sh ci/helm-package.sh
     when:
       event: push
