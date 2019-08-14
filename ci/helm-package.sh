@@ -22,7 +22,7 @@ else
   git config --global user.email ${GIT_EMAIL}
   git remote add origin https://${GIT_USER}:${GIT_TOKEN}@${REPO}
   git fetch
-  git checkout --track origin/master
+  git checkout --track origin/gh-pages
   git pull
 
   # add packaged helm chart and reindex
@@ -32,5 +32,5 @@ else
   # stage and commit new files, push to remote
   git add .
   git commit -m "Original commit: ${DRONE_COMMIT_SHA}"
-  git push -u origin master
+  git push -u origin gh-pages
 fi
