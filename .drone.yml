@@ -3,37 +3,11 @@ pipeline:
     image: alpine/helm:2.14.3
     environment:
       APP: kiam
-    commands:
-      - git
-      - helm init --client-only
-      - mkdir ./output/
-      - helm package ./helm/$APP/ -d ./output/
-    when:
-      event: push
-
-  git-prep:
-    image: alpine/git:1.0.7
     secrets:
       - GIT_USER
       - GIT_TOKEN
       - GIT_EMAIL
     commands:
-      - sh ./ci/git-prep.sh
-    when:
-      event: push
-
-  helm-index:
-    image: alpine/helm:2.14.3
-    commands:
-      - helm repo index $DRONE_WORKSPACE/new-repo/charts/
-    when:
-      event: push
-
-  git-push-remote:
-    image: alpine/git:1.0.7
-    secrets:
-      - GIT_EMAIL
-    commands:
-      - sh ./ci/git-push.sh
+      sh ci/helm-package.sh
     when:
       event: push
