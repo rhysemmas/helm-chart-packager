@@ -3,6 +3,7 @@ pipeline:
     image: alpine/helm:2.14.3
     environment:
       APP: nginx
+      REPO: github.com/rhysemmas/helm-chart-hoster.git
     secrets:
       - GIT_USER
       - GIT_TOKEN
