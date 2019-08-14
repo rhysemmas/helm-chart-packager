@@ -6,7 +6,7 @@ apk add git
 # check if changes have been made to the helm chart
 if ! git diff HEAD | grep -iE 'a\/helm.*';
 then
-  echo "No changes to helm chart made, continuing"
+  echo "No changes to helm chart made, skipping..."
   exit 0
 else
   # package helm chart
