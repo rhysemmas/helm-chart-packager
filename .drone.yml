@@ -4,10 +4,7 @@ pipeline:
     environment:
       APP: nginx
       REPO: github.com/rhysemmas/helm-chart-hoster.git
-    secrets:
-      - GIT_USER
-      - GIT_TOKEN
-      - GIT_EMAIL
+    secrets: [ git_user, git_token, git_email ]
     commands:
       sh ci/helm-package.sh
     when:
