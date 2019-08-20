@@ -2,11 +2,9 @@ pipeline:
   helm-package:
     image: alpine/helm:2.14.3
     environment:
-      APP: kiam
-    secrets:
-      - GIT_USER
-      - GIT_TOKEN
-      - GIT_EMAIL
+      APP: nginx
+      REPO: github.com/rhysemmas/helm-chart-hoster.git
+    secrets: [ git_user, git_token, git_email ]
     commands:
       sh ci/helm-package.sh
     when:
