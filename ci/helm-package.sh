@@ -26,7 +26,8 @@ else
   git pull
 
   # index new chart and merge old index to preserve chart creation dates
-  helm repo index ${DRONE_WORKSPACE}/output/ --merge ${DRONE_WORKSPACE}/new-repo/charts/index.yaml ${DRONE_WORKSPACE}/output/
+  cd ${DRONE_WORKSPACE}/output/
+  helm repo index ${DRONE_WORKSPACE}/output/ --merge ${DRONE_WORKSPACE}/new-repo/charts/index.yaml
   mv ${DRONE_WORKSPACE}/output/* ${DRONE_WORKSPACE}/new-repo/charts/
 
   # stage and commit new files, push to remote
