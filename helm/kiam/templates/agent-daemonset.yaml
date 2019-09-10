@@ -111,8 +111,8 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-    {{ toYaml .Values.agent.extraEnv | indent 12 }}
-          {{- end }}
+{{ toYaml .Values.agent.extraEnv | indent 12 }}
+        {{- end }}
           volumeMounts:
             - mountPath: /etc/kiam/tls
               name: tls
@@ -135,3 +135,4 @@ spec:
         {{- end }}
   updateStrategy:
     type: {{ .Values.agent.updateStrategy }}
+{{- end }}
