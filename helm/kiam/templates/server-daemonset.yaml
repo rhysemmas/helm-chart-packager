@@ -100,8 +100,8 @@ spec:
                 fieldRef:
                   fieldPath: status.podIP
         {{- if .Values.server.extraEnv }}
-{{ toYaml .Values.server.extraEnv | indent 10 }}
-      {{- end }}
+{{ toYaml .Values.server.extraEnv | indent 8 }}
+        {{- end }}
           volumeMounts:
             - mountPath: /etc/kiam/tls
               name: tls
