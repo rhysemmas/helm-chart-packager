@@ -95,6 +95,10 @@ spec:
             {{- end }}
           {{- end }}
         env:
+          - name: HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.podIP
         {{- if .Values.server.extraEnv }}
 {{ toYaml .Values.server.extraEnv | indent 10 }}
         {{- end }}
