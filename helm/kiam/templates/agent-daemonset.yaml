@@ -112,8 +112,6 @@ spec:
                 fieldRef:
                   fieldPath: status.podIP
           {{ toYaml .Values.agent.extraEnv | indent 12 }}
-            - name: {{ $name }}
-              value: {{ quote $value }}
           {{- end }}
           volumeMounts:
             - mountPath: /etc/kiam/tls
