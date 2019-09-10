@@ -135,4 +135,4 @@ spec:
         {{- end }}
   updateStrategy:
     type: {{ .Values.agent.updateStrategy }}
-{{- end }}
+  {{- end }}
