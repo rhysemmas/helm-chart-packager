@@ -94,9 +94,9 @@ spec:
             - --{{ $key }}
             {{- end }}
           {{- end }}
-         {{- if .Values.server.extraEnv }}
-        env:
-{{ toYaml .Values.server.extraEnv | indent 8 }}
+          env:
+          {{- if .Values.server.extraEnv }}
+{{ toYaml .Values.server.extraEnv | indent 12 }}
         {{- end }}
           volumeMounts:
             - mountPath: /etc/kiam/tls
