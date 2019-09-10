@@ -48,7 +48,7 @@ spec:
             secretName: {{ .Values.server.tlsSecret }}
             {{else}}
             secretName: {{ template "kiam.fullname" . }}-server
-            {{- end }}
+          {{- end }}
       {{- range .Values.server.extraHostPathMounts }}
         - name: {{ .name }}
           hostPath:
@@ -96,7 +96,7 @@ spec:
           {{- end }}
          {{- if .Values.server.extraEnv }}
         env:
-#{{ toYaml .Values.server.extraEnv | indent 10 }}
+{{ toYaml .Values.server.extraEnv | indent 10 }}
         {{- end }}
         volumeMounts:
             - mountPath: /etc/kiam/tls
