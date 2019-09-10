@@ -94,15 +94,11 @@ spec:
             - --{{ $key }}
             {{- end }}
           {{- end }}
+         {{- if .Values.server.extraEnv }}
         env:
-          - name: HOST_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.podIP
-        {{- if .Values.server.extraEnv }}
-{{ toYaml .Values.server.extraEnv | indent 8 }}
+{{ toYaml .Values.server.extraEnv | indent 10 }}
         {{- end }}
-          volumeMounts:
+        volumeMounts:
             - mountPath: /etc/kiam/tls
               name: tls
           {{- range .Values.server.extraHostPathMounts }}
