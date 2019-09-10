@@ -95,11 +95,8 @@ spec:
             {{- end }}
           {{- end }}
         {{- if .Values.server.extraEnv }}
-          env:
-          {{- range $name, $value := .Values.server.extraEnv }}
-            - name: {{ $name }}
-              value: {{ quote $value }}
-          {{- end }}
+        env:
+          {{ toYaml .Values.server.tolerations | indent 12 }}
         {{- end }}
           volumeMounts:
             - mountPath: /etc/kiam/tls
