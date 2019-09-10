@@ -111,6 +111,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
+          {{- if .Values.extraEnv }}
 {{ toYaml .Values.agent.extraEnv | indent 12 }}
         {{- end }}
           volumeMounts:
