@@ -2,7 +2,7 @@ pipeline:
   helm-package:
     image: alpine/helm:2.14.3
     environment:
-      APP: nginx
+      APP: kiam
       REPO: github.com/rhysemmas/helm-chart-hoster.git
     secrets: [ git_user, git_token, git_email ]
     commands:
