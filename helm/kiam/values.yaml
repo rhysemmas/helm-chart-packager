@@ -92,7 +92,7 @@ agent:
   extraArgs: {}
   ## Additional container environment variables
   ##
-  extraEnv: {}
+  extraEnv: []
 
   ## Additional container hostPath mounts
   ##
@@ -203,7 +203,7 @@ server:
   extraArgs: {}
   ## Additional container environment variables
   ##
-  extraEnv: {}
+  extraEnv: []
 
   ## Additional container hostPath mounts
   ##
